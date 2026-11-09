@@ -1,0 +1,591 @@
+/* ============================================================
+   Global Styles — Delivery Tracking System
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary:      #2563eb;
+  --primary-dark: #1d4ed8;
+  --success:      #16a34a;
+  --warning:      #ca8a04;
+  --danger:       #dc2626;
+  --gray-50:      #f8fafc;
+  --gray-100:     #f1f5f9;
+  --gray-200:     #e2e8f0;
+  --gray-400:     #94a3b8;
+  --gray-600:     #475569;
+  --gray-800:     #1e293b;
+  --white:        #ffffff;
+  --radius:       10px;
+  --shadow:       0 4px 24px rgba(0,0,0,0.10);
+  --transition:   0.2s ease;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-800);
+  min-height: 100vh;
+}
+
+/* ── App Shell ─────────────────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.header {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: white;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+.header-icon {
+  font-size: 2rem;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.header p {
+  font-size: 0.82rem;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* ── Main Layout ───────────────────────────────────────────── */
+.main {
+  flex: 1;
+  padding: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Search Card ───────────────────────────────────────────── */
+.search-section {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  margin-bottom: 28px;
+}
+
+.search-section h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--gray-800);
+}
+
+.search-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 220px;
+  padding: 12px 18px;
+  border: 2px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: border-color var(--transition);
+  outline: none;
+  text-transform: uppercase;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+}
+
+.search-input::placeholder {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--gray-400);
+}
+
+.search-btn {
+  padding: 12px 28px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.search-btn:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.search-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Error Banner ──────────────────────────────────────────── */
+.error-banner {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  color: var(--danger);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* ── Sample orders hint ────────────────────────────────────── */
+.hint-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin-top: 16px;
+  font-size: 0.88rem;
+  color: #1e40af;
+}
+
+.hint-box strong { font-weight: 600; }
+
+.hint-codes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.hint-code {
+  background: white;
+  border: 1px solid #93c5fd;
+  border-radius: 6px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 0.9rem;
+  transition: background var(--transition);
+}
+
+.hint-code:hover {
+  background: #dbeafe;
+}
+
+/* ── Results Grid ──────────────────────────────────────────── */
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .results-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  background: var(--gray-50);
+}
+
+.card-body {
+  padding: 24px;
+}
+
+/* ── Status Badge ──────────────────────────────────────────── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-pending      { background: #fef3c7; color: #92400e; }
+.badge-in_warehouse { background: #dbeafe; color: #1e40af; }
+.badge-in_transit   { background: #ede9fe; color: #5b21b6; }
+.badge-out_delivery { background: #fce7f3; color: #9d174d; }
+.badge-delivered    { background: #dcfce7; color: #14532d; }
+
+/* ── Order Info ────────────────────────────────────────────── */
+.order-code {
+  font-family: monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+  margin-top: 20px;
+}
+
+.info-item label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-400);
+  margin-bottom: 3px;
+}
+
+.info-item span {
+  font-size: 0.95rem;
+  color: var(--gray-800);
+}
+
+/* ── Progress Timeline ─────────────────────────────────────── */
+.timeline {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 8px 0;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.timeline-step:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  bottom: 0;
+  width: 2px;
+  background: var(--gray-200);
+}
+
+.timeline-step.done::before   { background: var(--success); }
+.timeline-step.active::before { background: var(--gray-200); }
+
+.step-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  background: var(--gray-100);
+  border: 2px solid var(--gray-200);
+  transition: all var(--transition);
+}
+
+.step-dot.done   { background: var(--success); border-color: var(--success); color: white; }
+.step-dot.active { background: var(--primary); border-color: var(--primary); color: white; animation: pulse 1.5s infinite; }
+.step-dot.future { background: var(--gray-100); border-color: var(--gray-200); color: var(--gray-400); }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(37,99,235,0); }
+}
+
+.step-content { flex: 1; padding-top: 6px; }
+.step-label   { font-weight: 600; font-size: 0.9rem; }
+.step-time    { font-size: 0.78rem; color: var(--gray-400); margin-top: 2px; }
+
+.step-dot.done + .step-content .step-label  { color: var(--success); }
+.step-dot.active + .step-content .step-label { color: var(--primary); }
+.step-dot.future + .step-content .step-label { color: var(--gray-400); }
+
+/* ── Map ────────────────────────────────────────────────────── */
+.map-section {
+  margin-top: 24px;
+}
+
+.map-wrapper {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.leaflet-container {
+  height: 420px;
+  width: 100%;
+}
+
+/* ── Live indicator ────────────────────────────────────────── */
+.live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  margin-right: 6px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+/* ── Map Progress Panel ────────────────────────────────────── */
+.map-progress-panel {
+  display:       flex;
+  flex-direction: column;
+  gap:           10px;
+  background:    var(--gray-50);
+  border:        1px solid var(--gray-200);
+  border-radius: 10px;
+  padding:       16px 20px;
+  margin-bottom: 14px;
+}
+
+/* Each row is a horizontal flex line */
+.mp-row {
+  display:     flex;
+  align-items: center;
+  gap:         14px;
+  min-height:  28px;
+}
+
+/* Label column — fixed width so all bars start at the same X */
+.mp-label-col {
+  display:     flex;
+  align-items: center;
+  gap:         6px;
+  width:       90px;       /* ← Y-axis alignment anchor */
+  flex-shrink: 0;
+}
+
+/* ── Header row ─────────────────────────────────────────────── */
+.mp-header-row {
+  min-height: 32px;
+}
+
+.mp-title {
+  font-size:   1rem;
+  font-weight: 700;
+  color:       var(--gray-800);
+  letter-spacing: -0.2px;
+}
+
+/* Thin separator between header and the bars */
+.mp-divider {
+  height:     1px;
+  background: var(--gray-200);
+  margin:     2px 0;
+}
+
+.mp-icon  { font-size: 1rem; }
+.mp-label {
+  font-size:   0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color:       var(--gray-400);
+}
+
+/* Bar column — fills remaining space */
+.mp-bar-col {
+  flex: 1;
+}
+
+/* Value column — fixed width, right-aligned */
+.mp-value-col {
+  width:        52px;
+  flex-shrink:  0;
+  text-align:   right;
+}
+
+.mp-pct {
+  font-size:   0.82rem;
+  font-weight: 700;
+  color:       var(--gray-600);
+}
+
+/* ── Continuous progress bar (Row 1) ──────── */
+.mp-bar-bg {
+  height:        8px;
+  background:    var(--gray-200);
+  border-radius: 99px;
+  overflow:      hidden;
+}
+
+.mp-bar-fill {
+  height:     100%;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mp-fill-route {
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+/* ── Segmented bar (Row 2) ───────────────── */
+.mp-bar-segmented {
+  display:    flex;
+  gap:        3px;
+  padding:    0;
+  background: transparent;
+  overflow:   visible;
+}
+
+.mp-segment {
+  height:        8px;
+  border-radius: 4px;
+  transition:    background 0.4s ease;
+}
+
+.seg-done   { background: var(--success); }
+.seg-active {
+  background: var(--primary);
+  animation:  segPulse 1.4s infinite;
+}
+.seg-future { background: var(--gray-200); }
+
+@keyframes segPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+
+/* ── Status / location row (Row 3) ──────── */
+.mp-status-col {
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+}
+
+.mp-status-text {
+  font-size:  0.88rem;
+  color:      var(--gray-600);
+  font-weight: 500;
+}
+
+.mp-step-badge {
+  font-size:    0.76rem;
+  font-weight:  700;
+  color:        var(--primary);
+  background:   #eff6ff;
+  border:       1px solid #bfdbfe;
+  border-radius: 99px;
+  padding:      2px 8px;
+}
+
+/* ── History list ──────────────────────────────────────────── */
+.history-list {
+  list-style: none;
+}
+
+.history-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.history-item:last-child { border-bottom: none; }
+
+.history-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.history-note  { font-size: 0.88rem; color: var(--gray-600); }
+.history-time  { font-size: 0.78rem; color: var(--gray-400); margin-top: 2px; }
+.history-label { font-weight: 600; font-size: 0.92rem; }
+
+/* ── Footer ────────────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  border-top: 1px solid var(--gray-200);
+  background: var(--white);
+}
+
+/* ── Leaflet marker smooth movement ───────────────────────── */
+/* Makes the truck icon glide between positions */
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* ── Road route loading shimmer ────────────────────────────── */
+.route-loading-badge {
+  position:    absolute;
+  top:         10px;
+  left:        50%;
+  transform:   translateX(-50%);
+  z-index:     1000;
+  background:  white;
+  border:      1px solid var(--gray-200);
+  border-radius: 8px;
+  padding:     8px 16px;
+  font-size:   0.82rem;
+  font-weight: 600;
+  color:       var(--gray-600);
+  box-shadow:  0 2px 8px rgba(0,0,0,0.12);
+  white-space: nowrap;
+  animation:   shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+
+/* ── Map container height adjustment ───────────────────────── */
+.leaflet-container {
+  height: 440px;
+  width: 100%;
+}

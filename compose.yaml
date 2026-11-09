@@ -1,0 +1,73 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+
+# All services will run in order they are called
+services:
+# mysql database service
+  db:
+  # pull the image if doesn't exists
+    image: mysql:8.0
+    # we paste our environment variables file into mysql image
+    # so that we don't need to expose our secrets
+    env_file:
+      - ./backend/.env
+      # I have copied this from a stackoverflow post.
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+
+  # our backend server
+  server:
+  # as you can read it, depends_on means that this service won't run until specified service runs
+  # this way we create a run order among services
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    image: backend-server:latest
+    # we point to the build folder for this image if --build flag is called
+    build: ./backend
+    # server also needs same credentials for database
+    env_file:
+      - ./backend/.env
+    # custom environment variables
+    environment:
+      NODE_ENV: production
+    # exposed port from container to the computer, so that computer can send requests to this port
+    ports:
+      - 4000:4000
+
+  # runs seed.js once to create tables and insert sample data, then exits
+  seeder:
+    depends_on:
+      db:
+        condition: service_healthy
+    image: backend-server:latest
+    build: ./backend
+    env_file:
+      - ./backend/.env
+    environment:
+      NODE_ENV: production
+    restart: "no"
+    command: node ./seed.js
+
+  # our react server
+  # same descriptions as above
+  frontend:
+    depends_on:
+      - server
+    image: frontend-server:latest
+    build: ./frontend
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    
